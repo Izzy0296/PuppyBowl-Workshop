@@ -3,3 +3,35 @@
   margin: 0;
   box-sizing: border-box;
 }
+
+.playerClass{
+  display: flex;
+  flex-direction: column;
+  padding: 1.5em;
+  border-radius: 10%;
+  background-color: #A2AD59;
+  border-color: black;
+  margin: 2em;
+}
+
+img{
+  height: 25em;
+  width: 20em;
+}
+
+#all-players-container {
+  display: flex;
+  flex-wrap: wrap;
+
+}
+
+#new-player-form {
+
+}
+
+button{
+  padding: 0.5em;
+  margin: 0.5em;
+  border-radius: 0.5em;
+
+}

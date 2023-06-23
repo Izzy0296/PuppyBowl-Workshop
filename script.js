@@ -4,7 +4,10 @@ const newPlayerFormContainer = document.getElementById('new-player-form');
 // Add your cohort name to the cohortName variable below, replacing the 'COHORT-NAME' placeholder
 const cohortName = 'YOUR COHORT NAME HERE';
 // Use the APIURL variable for fetch requests
-const APIURL = `https://fsa-puppy-bowl.herokuapp.com/api/${cohortName}/`;
+// const APIURL = `https://fsa-puppy-bowl.herokuapp.com/api/${cohortName}/`;
+const BASE_URL = 'https://fsa-puppy-bowl.herokuapp.com';
+
+
 
 /**
  * It fetches all players from the API and returns them
@@ -12,6 +15,20 @@ const APIURL = `https://fsa-puppy-bowl.herokuapp.com/api/${cohortName}/`;
  */
 const fetchAllPlayers = async () => {
     try {
+
+        const rawData = await fetch(`${BASE_URL}/api/${cohortName}/players`)
+        console.log("after fetch")
+        console.log(rawData)
+        const resultData = await rawData.text()
+        console.log("after text")
+        console.log(resultData)
+        const resultJsonData = JSON.parse(resultData)
+        console.log("after JSON")
+
+        // console.log(resultJsonData)
+        console.log(resultJsonData.data.players)
+        return resultJsonData.data.players;
+
 
     } catch (err) {
         console.error('Uh oh, trouble fetching players!', err);
@@ -67,7 +84,65 @@ const removePlayer = async (playerId) => {
  */
 const renderAllPlayers = (playerList) => {
     try {
-        
+
+        //use these
+        playerList.forEach((dog) => {
+            const dogElement = document.createElement("div")
+            dogElement.classList.add('playerClass');
+            dogElement.innerHTML = `
+                <h2>${dog.name}</h2>
+                <h4>${dog.breed}</h4>
+                <h4>${dog.status}</h4>
+                <img src="${dog.imageUrl}" alt="${dog.name}"></img>
+                <div>
+                <button class="details-button" id="${dog.id}">See Details</button>
+                
+                <button class="delete-button" id="${dog.id}">Delete From Roster</button>
+                </div>
+                `
+            playerContainer.append(dogElement)
+
+            // see details
+            const detailsButton = dogElement.querySelector('.details-button');
+            detailsButton.addEventListener('click', async (event) => {
+                // your code here
+
+                console.log("detail button clicked")
+
+                console.log(event)
+                console.log(event.target.id)
+                let id = event.target.id;
+                
+                console.log(id)
+
+                // renderSinglePlayerById(id, dogElement)
+
+            });
+
+            // delete player
+            const deleteButton = dogElement.querySelector('.delete-button');
+            deleteButton.addEventListener('click', async (event) => {
+                // your code here
+                console.log("delete button clicked")
+
+                console.log(event)
+                console.log(event.target.id)
+                let id = event.target.id;
+                console.log(id)
+
+                //send DELETE API 
+                // const response = await removelayer(id)
+                // console.log(response)
+
+                // if (response.status === 200) {
+                //     console.log("inside 200 if")
+                //     dogElement.remove();
+                // }
+
+            });
+
+        })
+
     } catch (err) {
         console.error('Uh oh, trouble rendering players!', err);
     }
@@ -80,11 +155,13 @@ const renderAllPlayers = (playerList) => {
  */
 const renderNewPlayerForm = () => {
     try {
-        
+
     } catch (err) {
         console.error('Uh oh, trouble rendering the new player form!', err);
     }
 }
+
+
 
 const init = async () => {
     const players = await fetchAllPlayers();
