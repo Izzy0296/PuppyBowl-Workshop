@@ -25,7 +25,15 @@ img{
 
 }
 
+#image{
+  width: 50em;
+}
+
 #new-player-form {
+  display: flex;
+  flex-direction: column;
+  width: 20em;
+  margin-left: 2em;
 
 }
 
@@ -35,3 +43,30 @@ button{
   border-radius: 0.5em;
 
 }
+
+input{
+  height: 2em;
+}
+
+select{
+  height: 2em;
+}
+
+.player-details{
+  /* background-color: #BEB7A4; */
+  background-color: #f7ad50;
+  border-radius: 0.5em;
+  padding: 1.5em;
+}
+
+ body{
+  background-image: url("american-football-field.jpeg");
+  background-size: cover;
+  background-attachment: fixed;
+ }
+
+ #page-h2{
+  text-align: center;
+  font-size: 3rem;
+  color: #c9e265;
+ }

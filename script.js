@@ -37,6 +37,14 @@ const fetchAllPlayers = async () => {
 
 const fetchSinglePlayer = async (playerId) => {
     try {
+        console.log("inside fetchSinglePlayer")
+        // const response = await fetch(`${PARTIES_API_URL}/${id}`);
+        const response = await fetch(`${BASE_URL}/api/${cohortName}/players/${playerId}`)
+        console.log(response)
+        const party = await response.json();
+        console.log(party.data.player)
+        return party.data.player;
+        // return party;
 
     } catch (err) {
         console.error(`Oh no, trouble fetching player #${playerId}!`, err);
@@ -84,7 +92,7 @@ const removePlayer = async (playerId) => {
  */
 const renderAllPlayers = (playerList) => {
     try {
-
+        
         //use these
         playerList.forEach((dog) => {
             const dogElement = document.createElement("div")
@@ -95,7 +103,7 @@ const renderAllPlayers = (playerList) => {
                 <h4>${dog.status}</h4>
                 <img src="${dog.imageUrl}" alt="${dog.name}"></img>
                 <div>
-                <button class="details-button" id="${dog.id}">See Details</button>
+                <button class="details-button" id="${dog.id}">See Player Details</button>
                 
                 <button class="delete-button" id="${dog.id}">Delete From Roster</button>
                 </div>
@@ -115,7 +123,7 @@ const renderAllPlayers = (playerList) => {
                 
                 console.log(id)
 
-                // renderSinglePlayerById(id, dogElement)
+                renderSinglePlayerById(id, dogElement)
 
             });
 
@@ -160,6 +168,47 @@ const renderNewPlayerForm = () => {
         console.error('Uh oh, trouble rendering the new player form!', err);
     }
 }
+
+
+// render a single player by id
+const renderSinglePlayerById = async (id, dogElement) => {
+    try {
+        if (dogElement.querySelector(".player-details")) {
+            return;
+
+        }
+        console.log(`inside renderSinglePlayerById, ${id} `)
+        // fetch player details from server
+        const player = await fetchSinglePlayer(id);
+        console.log(player)
+
+        // create new HTML element to display player details
+        const playerDetailsElement = document.createElement('div');
+        playerDetailsElement.classList.add('player-details');
+        playerDetailsElement.innerHTML = `
+            <h3>PLAYER:    ${player.name}</h3>
+            <h4>ID:        ${player.id}</h4>
+            <h4>STATUS:    ${player.status}</h4>
+            <h4>BREED:     ${player.breed}</h4>
+            <h4>CREATED AT:${player.createdAt}</h4>
+            <h4>TEAM_ID:   ${player.teamId}</h4>           
+            <h4>COHORT_ID: ${player.cohortId}</h4>
+                      
+            <button class="close-button">Close</button>
+        `;
+
+        // partyContainer.appendChild(partyDetailsElement);
+        dogElement.appendChild(playerDetailsElement);
+
+        // add event listener to close button
+        const closeButton = playerDetailsElement.querySelector('.close-button');
+        closeButton.addEventListener('click', () => {
+            playerDetailsElement.remove();
+        });
+    } catch (error) {
+        console.error(error);
+    }
+};
 
 
 
