@@ -41,6 +41,7 @@ const fetchSinglePlayer = async (playerId) => {
         console.log("inside fetchSinglePlayer")
         // const response = await fetch(`${PARTIES_API_URL}/${id}`);
         const response = await fetch(`${BASE_URL}/api/${cohortName}/players/${playerId}`)
+        
         console.log(response)
         const party = await response.json();
         console.log(party.data.player)
@@ -53,7 +54,23 @@ const fetchSinglePlayer = async (playerId) => {
 };
 
 const addNewPlayer = async (playerObj) => {
+// const addNewPlayer =  (playerObj) => {
     try {
+        console.log("inside addNewPlayer ")
+        console.log(playerObj)
+
+        const response = await fetch(`${BASE_URL}/api/${cohortName}/players`,        
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(playerObj),
+            }
+        );
+        console.log(response)
+        const result = await response.json();
+        console.log(result);
 
     } catch (err) {
         console.error('Oops, something went wrong with adding that player!', err);
@@ -165,6 +182,56 @@ const renderAllPlayers = (playerList) => {
 const renderNewPlayerForm = () => {
     try {
 
+
+        const newPlayerForm = document.querySelector('#new-player-form');
+        newPlayerForm.innerHTML = `
+                <form>
+                  <label for="name">Name</label><br>
+                  <input type="text" name="name" id="name" placeholder required/><br>
+
+                  <label for="breed">Breed</label><br>
+                  <input type="text" name="breed" id="breed" placeholder required/><br>
+
+                  <label for="status">Status</label><br>
+                  <select id="status" name="status" required><br>
+                         <option value="bench">bench</option>
+                         <option value="field">field</option>
+                  </select><br>
+
+                  <label for="image">ImageUrl</label><br>
+                  <input type="text" name="image" id="image" placeholder required/><br>
+
+                  <button type="submit">Add New Player</button><br>
+                </form>
+              `;
+
+        console.log("before add listener")
+
+        newPlayerForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const breed = document.getElementById('breed').value;
+            const status = document.getElementById('status').value;
+            const image = document.getElementById('image').value;
+
+            const newPlayer = {
+                name: name,                
+                breed: breed,               
+                status: status,
+                imageUrl: image
+                
+            };
+            console.log("listener callback")
+            console.log(newPlayer)
+
+            await addNewPlayer(newPlayer);
+
+            //will make it more network traffic efficient
+            const players = await fetchAllPlayers();
+            renderAllPlayers(players);
+           
+        });
+        
     } catch (err) {
         console.error('Uh oh, trouble rendering the new player form!', err);
     }
@@ -192,6 +259,7 @@ const renderSinglePlayerById = async (id, dogElement) => {
             <h4>STATUS:    ${player.status}</h4>
             <h4>BREED:     ${player.breed}</h4>
             <h4>CREATED AT:${player.createdAt}</h4>
+            <h4>UPDATED AT:${player.updatedAt}</h4>
             <h4>TEAM_ID:   ${player.teamId}</h4>           
             <h4>COHORT_ID: ${player.cohortId}</h4>
                       
