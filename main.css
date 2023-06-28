@@ -1,0 +1,137 @@
+/* #all-players-container{
+/* #all-players-container{
+/* #all-players-container{
+/* #all-players-container{
+/* #all-players-container{
+/* #all-players-container{
+/* #all-players-container{
+/* #all-players-container{
+/* #all-players-container{
+/* #all-players-container{
+/* #all-players-container{
+/* #all-players-container{
+/* #all-players-container{
+/* #all-players-container{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: auto;
+  grid-gap: 1rem;
+  margin: 60px;
+  
+  
+} */
+.player-card {
+.player-ca.player-card {
+  border: 2px solid #E7E7E7;
+  border-radius: 4px;
+  padding: .5rem;
+  border-radius: 20px;
+  border-color:rgb(176, 179, 181)
+  
+}
+img {
+  height: 20vw;
+  width:20vw
+}
+body{
+  background-image: url(https://cdn.wallpapersafari.com/32/78/dTuctf.jpg); 
+
+  background-size: cover;
+  background-attachment: fixed;
+  
+  
+  
+  
+}
+
+h1{
+  text-align: center;
+  color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  
+  border-radius: 4px;
+  padding: .5rem;
+  border-radius: 20px;
+  border-color:rgb(176, 179, 181)
+  
+}
+
+P{
+  text-align: center;
+  text-align: center;
+  color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+
+
+
+
+#image {
+  width: 10em;
+}
+select {
+  height: 2em;
+  width: 10em;
+}
+
+input {
+  height: 2em;
+  width: 10em;
+ 
+ 
+}
+
+label{
+  text-align: center;
+}
+
+/* form{ */
+  /* border: 8px solid #E7E7E7; */
+  /* border-radius: 4px; */
+  /* padding: 4.5rem; */
+  /* border-radius: 20px; */
+  /* border-color: rgb(214 230 207) */
+  
+  
+/* } */
+
+form{
+  background: #f4faf4;
+  font-family: Montserrat, sans-serif;;
+  font-size: 24px;
+  line-height: 30px;
+  font-weight: bold;
+  color: #dce9e8;
+  padding: 40px;
+  box-shadow:
+	  inset #c1e1c1 0 0 0 5px, 
+    inset #578865 0 0 0 1px, 
+    inset #c9d3c9 0 0 0 10px, 
+    inset #0e751e 0 0 0 11px, 
+    inset #cdd7da 0 0 0 16px, 
+    inset #147b3d 0 0 0 17px, 
+    inset #e5f9f7 0 0 0 21px, 
+    inset #0e542a 0 0 0 22px;
+  text-shadow: 3px 3px 1px #435d63;
+  margin: 2em;
+}
+
+
+h4{
+  color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  text-align: center;
+  margin: 0.5em;
+  font-size: 18px;
+
+}
+
+h2{
+  color: white;
+  text-shadow: -3px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  text-align: center;
+  margin: 0.3em;
+  font-size: 33px;
+}
+
