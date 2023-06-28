@@ -1,27 +1,9 @@
-/* #all-players-container{
-/* #all-players-container{
-/* #all-players-container{
-/* #all-players-container{
-/* #all-players-container{
-/* #all-players-container{
-/* #all-players-container{
-/* #all-players-container{
-/* #all-players-container{
-/* #all-players-container{
-/* #all-players-container{
-/* #all-players-container{
-/* #all-players-container{
-/* #all-players-container{
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: auto;
-  grid-gap: 1rem;
-  margin: 60px;
+
   
   
-} */
+
 .player-card {
-.player-ca.player-card {
+
   border: 2px solid #E7E7E7;
   border-radius: 4px;
   padding: .5rem;
